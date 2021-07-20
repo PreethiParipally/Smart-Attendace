@@ -33,7 +33,6 @@ class Attendance(BoxLayout):
     def _init_(self, **kwargs):
         super(Attendance, self)._init_(**kwargs)
 
-
     def audioInput(self):   # Taking the audio input
         global audio
         with mic as source:
@@ -45,13 +44,21 @@ class Attendance(BoxLayout):
 
     def recognize(self, audio):    # Recognizing the audio
         global attendance, string
-        attendance += r.recognize_google(audio)
-        for i in range(len(attendance)):
-            attendance = attendance.replace(" ", "")
-        attendance = attendance.split("absent")
+        try:
+            temp=r.recognize_google(audio)
+            # print(temp)
+            attendance += "".join(temp)
+            print(attendance,type(attendance))
+            for i in range(len(attendance)):
+                attendance = attendance.replace(" ", "")
+            attendance = attendance.split("absent")
 
-        for i in range(len(attendance)):
-            string += attendance[i]
+            for i in range(len(attendance)):
+                string += attendance[i]
+        except sr.RequestError as e:  
+            print("error; {0}".format(e))
+        except sr.UnknownValueError as ue:
+            print("error; {0}".format(ue))
 
 
     def captureRecords(self):   # Capturing the records
@@ -64,6 +71,7 @@ class Attendance(BoxLayout):
                     v = 2
                 elif count > 99 and count < 999:
                     v = 3
+            print(attendance[-1][-1],attendance[i][-v])
             if attendance[-1][-1] not in attendance[i][-v]:
                 absent_record.append(attendance[i][-v:])
 
@@ -101,7 +109,7 @@ class Attendance(BoxLayout):
                 att.write(record[i])
             att.close()
         print("\n")
-        print("Attendance Logged at /home/arghya/Smart Attendance/attendance_log.txt")
+        print("Attendance Logged at /xampp/htdocs/Smart-Attendace/attendance_log.txt")
         print()
 
 
@@ -114,17 +122,17 @@ class Attendance(BoxLayout):
     def passingToDatabase(self): # Passing ll the records to the database
         global clas
         clas = clas.upper()
-        ip = 'http://localhost/Mini%20Project/index.php' # Modify this url  < This url directs to the LOGIN page >
+        ip = 'http://localhost/Smart-Attendace/index.php' # Modify this url  < This url directs to the LOGIN page >
         data = presents #example of class
         token = "182ED54D634B78F47A31A68360C152BA"  #token is fixed
-        url= ip+"attendance/store.php?class="+clas+"&data="+data+"&token="+token
+        url= ip+"Smart-Attendace/store.php?class="+clas+"&data="+data+"&token="+token
 
         requests.get(url)
         print("Data dumped Successfully!")
 
 
     def viewDatabase(self):    # Requesting the database to open on browser
-        url = "http://localhost/Mini%20Project/attendance.php"  # Modify this url  < URL directs to 'attendance' page >
+        url = "http://localhost/Smart-Attendace/attendance.php"  # Modify this url  < URL directs to 'attendance' page >
 
         webbrowser.open(url)
 
