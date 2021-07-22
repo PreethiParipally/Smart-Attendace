@@ -76,13 +76,13 @@ if ($state!='active' || $row_num==0)
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="home.php"><i class="fa fa-home icon" aria-hidden="true"></i>Home</a>
+                        <a class="nav-link" href="hometeacher.php"><i class="fa fa-home icon" aria-hidden="true"></i>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="details.php"><i class="fa fa-info-circle icon" aria-hidden="true"></i>Details</a>
+                        <a class="nav-link" href="detailst.php"><i class="fa fa-info-circle icon" aria-hidden="true"></i>Details</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="attendance.php"><i class="fa fa-calendar-check-o icon" aria-hidden="true"></i>Attendance</a>
+                        <a class="nav-link" href="attendancet.php"><i class="fa fa-calendar-check-o icon" aria-hidden="true"></i>Attendance</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -134,97 +134,114 @@ if ($state!='active' || $row_num==0)
                 $type = sanitize($_GET['Login']);
                 $class = sanitize($_GET['class']);
                 $date = sanitize($_GET['date']);
-                if ($type == 'details') {
-                    $name = sanitize($_GET['name']);
-                    $roll = sanitize($_GET['roll']);
-                    if (strlen($roll) == 1) {
-                        $new_roll = "0" . $roll;
-                    }
-                    $pre_sql = "SELECT id FROM `student` WHERE name = '$name' AND roll = $roll AND class = '$class'";
-                    $rlt = mysqli_query($con, $pre_sql);
-                    if (mysqli_num_rows($rlt) > 0) {
-                        $sql = "SELECT `d_id` FROM `attend` WHERE `date` = '$date' AND `details` LIKE '%-$new_roll-%'";
-                        $result = mysqli_query($con, $sql);
-                        if (mysqli_num_rows($result) > 0) {
-                            $status = 'Present';
-                        } else {
-                            $status = 'Absent';
-                        }
-                        // echo "Name: <b>$name</b> || Class: <b>$class</b> || Roll: <b>$new_roll</b><br>Attendance status on Date: $date : <b>$status</b>";
-                        echo "<div style='text-align:center'>";
-                        echo "<tr>";
-                            echo "<td>Name: <b>$name</b></td>";
-                        echo "</tr>\n";
-                        echo "<br>";
-                        echo "<tr>";
-                            echo "<td>Class: <b>$class</b></td>";
-                        echo "</tr>\n";
-                        echo "<br>";
-                        echo "<tr>";
-                            echo "<td>Roll: <b>$new_roll</b></td>";
-                        echo "</tr>\n";
-                        echo "<br>";
-                        echo "<tr>";
-                            echo "<td>Status: <b>$status</b></td>";
-                        echo "</tr>\n";
-                        echo "<br>";
-                        echo "<tr>";
-                            echo "<td>Date: <b>$date</b></td>";
-                        echo "</tr>\n";
-                        echo "<br>";
-                        echo "</div>";
-                    } else {
-                        echo "Wrong Student details entered!";
-                    }
-                } else {
-                    $sql = "SELECT `details` FROM `attend` WHERE `date` = '$date' AND `class`='$class'";
-                    $result = mysqli_query($con, $sql);
-                    if (mysqli_num_rows($result) > 0) {
-                        $row = mysqli_fetch_assoc($result);
-                        $str = $row['details'];
-                        $str = substr($str, 1, strlen($str) - 2);
-                        $arr = explode("-", $str);
-                        $sql = "UPDATE `student` SET `status` = 'Present' WHERE `student`.`class` = '$class' AND `student`.`roll` = ";
-                        $len = count($arr);
-                        for ($i = 0; $i < $len; $i++) {
-                            $run_sql = $sql . (int)$arr[$i];
-                            mysqli_query($con, (string)$run_sql);
-                        }
-                        $show = "SELECT `name`, `roll`, `status` FROM `student` WHERE `class` = '$class'";
-                        $show_result = mysqli_query($con, $show);
-                        if (mysqli_num_rows($show_result) > 0) {
-            ?>
-                            <table class="table-striped" border="3" class="table-sm" align="center">
-                                <tr>
-                                    <th> Name</th>
-                                    <th> Roll</th>
-                                    <th> Class</th>
-                                    <th> Status</th>
-                                </tr>
-                <?php
-                            while ($row = mysqli_fetch_row($show_result)) {
-                                echo "<tr><td>" . $row[0] . "</td>";
-                                echo "<td>" . $row[1] . "</td>";
-                                echo "<td>" . $class . "</td>";
-                                if ($row[2] == 'Present')
-                                    echo "<td><font color=green>" . $row[2] . "</font></td></tr>";
-                                else
-                                    echo "<td><font color=red>" . $row[2] . "</font></td></tr>";
-                            }
-                            $sql = "UPDATE `student` SET `status` = 'Absent' WHERE `student`.`class` = '$class' AND `student`.`roll` = ";
-                            $len = count($arr);
-                            for ($i = 0; $i < $len; $i++) {
-                                $run_sql = $sql . (int)$arr[$i];
-                                mysqli_query($con, (string)$run_sql);
-                            }
-                        } else {
-                            echo "No data found!!!";
-                        }
-                    } else
-                        echo "No data found!!!";
+                $uname=$_SESSION['name']; 
+                $sqlt="SELECT class FROM user u inner join teacher t on u.id=t.uid inner join teaches te on te.tid=t.id and username= '$uname'";
+                $result = mysqli_query($con, $sqlt);
+                if (!$result) {
+                    printf("Error: %s\n", mysqli_error($con));
+                    exit();
                 }
+                if (mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_assoc($result);
+                    $class1 = $row['class'];
+                    if($class==$class1){
+                        if ($type == 'details') {
+                            $name = sanitize($_GET['name']);
+                            $roll = sanitize($_GET['roll']);
+                            if (strlen($roll) == 1) {
+                                $new_roll = "0" . $roll;
+                            }
+                            $pre_sql = "SELECT id FROM `student` WHERE name = '$name' AND roll = $roll AND class = '$class'";
+                            $rlt = mysqli_query($con, $pre_sql);
+                            if (mysqli_num_rows($rlt) > 0) {
+                                $sql = "SELECT `d_id` FROM `attend` WHERE `date` = '$date' AND `details` LIKE '%-$new_roll-%'";
+                                $result = mysqli_query($con, $sql);
+                                if (mysqli_num_rows($result) > 0) {
+                                    $status = 'Present';
+                                } else {
+                                    $status = 'Absent';
+                                }
+                                // echo "Name: <b>$name</b> || Class: <b>$class</b> || Roll: <b>$new_roll</b><br>Attendance status on Date: $date : <b>$status</b>";
+                                echo "<div style='text-align:center'>";
+                                echo "<tr>";
+                                    echo "<td>Name: <b>$name</b></td>";
+                                echo "</tr>\n";
+                                echo "<br>";
+                                echo "<tr>";
+                                    echo "<td>Class: <b>$class</b></td>";
+                                echo "</tr>\n";
+                                echo "<br>";
+                                echo "<tr>";
+                                    echo "<td>Roll: <b>$new_roll</b></td>";
+                                echo "</tr>\n";
+                                echo "<br>";
+                                echo "<tr>";
+                                    echo "<td>Status: <b>$status</b></td>";
+                                echo "</tr>\n";
+                                echo "<br>";
+                                echo "<tr>";
+                                    echo "<td>Date: <b>$date</b></td>";
+                                echo "</tr>\n";
+                                echo "<br>";
+                                echo "</div>";
+                            } else {
+                                echo "<h2 style='text-align:center;'>Wrong Student details entered!!</h2>";
+                            }
+                        } else {
+                            $sql = "SELECT `details` FROM `attend` WHERE `date` = '$date' AND `class`='$class'";
+                            $result = mysqli_query($con, $sql);
+                            if (mysqli_num_rows($result) > 0) {
+                                $row = mysqli_fetch_assoc($result);
+                                $str = $row['details'];
+                                $str = substr($str, 1, strlen($str) - 2);
+                                $arr = explode("-", $str);
+                                $sql = "UPDATE `student` SET `status` = 'Present' WHERE `student`.`class` = '$class' AND `student`.`roll` = ";
+                                $len = count($arr);
+                                for ($i = 0; $i < $len; $i++) {
+                                    $run_sql = $sql . (int)$arr[$i];
+                                    mysqli_query($con, (string)$run_sql);
+                                }
+                                $show = "SELECT `name`, `roll`, `status` FROM `student` WHERE `class` = '$class'";
+                                $show_result = mysqli_query($con, $show);
+                                if (mysqli_num_rows($show_result) > 0) {
+                    ?>
+                                    <table class="table-striped" border="3" class="table-sm" align="center">
+                                        <tr>
+                                            <th> Name</th>
+                                            <th> Roll</th>
+                                            <th> Class</th>
+                                            <th> Status</th>
+                                        </tr>
+                        <?php
+                                    while ($row = mysqli_fetch_row($show_result)) {
+                                        echo "<tr><td>" . $row[0] . "</td>";
+                                        echo "<td>" . $row[1] . "</td>";
+                                        echo "<td>" . $class . "</td>";
+                                        if ($row[2] == 'Present')
+                                            echo "<td><font color=green>" . $row[2] . "</font></td></tr>";
+                                        else
+                                            echo "<td><font color=red>" . $row[2] . "</font></td></tr>";
+                                    }
+                                    $sql = "UPDATE `student` SET `status` = 'Absent' WHERE `student`.`class` = '$class' AND `student`.`roll` = ";
+                                    $len = count($arr);
+                                    for ($i = 0; $i < $len; $i++) {
+                                        $run_sql = $sql . (int)$arr[$i];
+                                        mysqli_query($con, (string)$run_sql);
+                                    }
+                                } else {
+                                    echo "<br><h2 style='text-align:center;'>No data found!!!</h2><br><br>";
+                                }
+                            } else
+                            echo "<br><h2 style='text-align:center;'>No data found!!!</h2><br><br>";
+                        }
+                    }
+                    else{
+                        echo "<br><h2 style='text-align:center;'>You are not a teacher for this class!!!</h2><br><br>";
+                    }
+                }
+                
             }
-                ?>
+            ?>
 
             </table>
 

@@ -66,16 +66,13 @@
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="homestudent.php"><i class="fa fa-home icon" aria-hidden="true"></i>Home</a>
+            <a class="nav-link" href="hometeacher.php"><i class="fa fa-home icon" aria-hidden="true"></i>Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="subject.php"><i class="fa fa-info-circle icon" aria-hidden="true"></i>Subjects</a>
+            <a class="nav-link" href="detailst.php"><i class="fa fa-info-circle icon" aria-hidden="true"></i>Details</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="details1.php"><i class="fa fa-info-circle icon" aria-hidden="true"></i>Details</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="attendance1.php"><i class="fa fa-calendar-check-o icon" aria-hidden="true"></i>Attendance</a>
+            <a class="nav-link" href="attendancet.php"><i class="fa fa-calendar-check-o icon" aria-hidden="true"></i>Attendance</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">

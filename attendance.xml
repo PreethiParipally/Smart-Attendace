@@ -46,9 +46,18 @@
                   PRIMARY KEY (`id`)
                 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
             </pma:table>
+            <pma:table name="reset">
+                CREATE TABLE `reset` (
+                  `id` int(5) NOT NULL AUTO_INCREMENT,
+                  `uname` varchar(10) NOT NULL UNIQUE,
+                  `token` varchar(32) NOT NULL,
+                   PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+            </pma:table>
             <pma:table name="teacher">
                 CREATE TABLE `teacher` (
                   `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `uid` int(5) NOT NULL references user(id),
                   `name` text NOT NULL,
                   `roll` int(11) NOT NULL,
                   PRIMARY KEY (`id`)
@@ -71,6 +80,7 @@
                   PRIMARY KEY (`id`)
                 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
             </pma:table>
+
         </pma:database>
     </pma:structure_schemas>
 
@@ -212,7 +222,7 @@
             <column name="id">1</column>
             <column name="username">admin</column>
             <column name="password">password</column>
-            <column name="tag">teacher</column>
+            <column name="tag">admin</column>
             <column name="token">21232f297a57a5a743894a0e4a801fc3</column>
         </table>
         <table name="user">
@@ -299,6 +309,27 @@
             <column name="tag">student</column>
             <column name="token">ccf749dcf7aa6920edb4f9dac925f0a0</column>
         </table>
+        <table name="user">
+            <column name="id">14</column>
+            <column name="username">Radhika</column>
+            <column name="password">welcome@123</column>
+            <column name="tag">teacher</column>
+            <column name="token">a3d991e49b0fb37b4e352efdaa79b02f</column>
+        </table>
+        <table name="user">
+            <column name="id">15</column>
+            <column name="username">Suresh</column>
+            <column name="password">welcome@123</column>
+            <column name="tag">teacher</column>
+            <column name="token">bac015e70aa82a58423deae70f973c27</column>
+        </table>
+        <table name="user">
+            <column name="id">16</column>
+            <column name="username">Subash</column>
+            <column name="password">welcome@123</column>
+            <column name="tag">teacher</column>
+            <column name="token">4d4458d5d3f1dfa1d97be60a27cfe173</column>
+        </table>
 
         <!-- Table Subject -->
 
@@ -322,16 +353,19 @@
 
         <table name="teacher">
             <column name="id">1</column>
+            <column name="uid">14</column>
             <column name="name">Radhika</column>
             <column name="roll">15071A583</column>
         </table>
         <table name="teacher">
             <column name="id">2</column>
+            <column name="uid">15</column>
             <column name="name">Suresh</column>
             <column name="roll">13071A583</column>
         </table>
         <table name="teacher">
             <column name="id">3</column>
+            <column name="uid">16</column>
             <column name="name">Subash</column>
             <column name="roll">11071A583</column>
         </table>
@@ -368,12 +402,12 @@
             <column name="tid">3</column>
             <column name="class">I</column>
         </table>
-        <table name="teaches">
+        <!-- <table name="teaches">
             <column name="id">6</column>
             <column name="sid">2</column>
             <column name="tid">2</column>
             <column name="class">I</column>
-        </table>
+        </table> -->
         <table name="teaches">
             <column name="id">7</column>
             <column name="sid">2</column>
@@ -386,12 +420,12 @@
             <column name="tid">1</column>
             <column name="class">II</column>
         </table>
-        <table name="teaches">
+        <!-- <table name="teaches">
             <column name="id">9</column>
             <column name="sid">1</column>
             <column name="tid">1</column>
             <column name="class">III</column>
-        </table>
+        </table> -->
 
 
 

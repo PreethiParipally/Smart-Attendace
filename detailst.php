@@ -6,8 +6,8 @@ $check_hash = md5($_SESSION['name']);
 $check_hash_sql = "SELECT `id` FROM `user` WHERE `token` = '$check_hash'";
 $check_hash_result = mysqli_query($con, $check_hash_sql);
 $row_num = mysqli_num_rows($check_hash_result);
-#if ($state!='active' || $row_num==0)
-#   header("Location: index.php");
+if ($state!='active' || $row_num==0)
+   header("Location: index.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,13 +59,13 @@ $row_num = mysqli_num_rows($check_hash_result);
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="home.php"><i class="fa fa-home icon" aria-hidden="true"></i>Home</a>
+                        <a class="nav-link" href="hometeacher.php"><i class="fa fa-home icon" aria-hidden="true"></i>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="details.php"><i class="fa fa-info-circle icon" aria-hidden="true"></i>Details</a>
+                        <a class="nav-link" href="detailst.php"><i class="fa fa-info-circle icon" aria-hidden="true"></i>Details</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="attendance.php"><i class="fa fa-calendar-check-o icon" aria-hidden="true"></i>Attendance</a>
+                        <a class="nav-link" href="attendancet.php"><i class="fa fa-calendar-check-o icon" aria-hidden="true"></i>Attendance</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -82,12 +82,17 @@ $row_num = mysqli_num_rows($check_hash_result);
             include("sanitize.php");
             echo "<span align=center style='font-size: 28px;'><u>Select the class</u></span><br><br>";
             include("dbcon2.php");
-            $sql = "SELECT DISTINCT `class` FROM `student`";
+            $uname=$_SESSION['name']; 
+            $sql = "SELECT class FROM teaches t inner join teacher te on t.sid=te.id inner join user u on te.uid=u.id and  username = '$uname' ";
             $result = mysqli_query($con, $sql);
+            if (!$result) {
+                printf("Error: %s\n", mysqli_error($con));
+                exit();
+            }
             $i = 1;
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<a class='cls' href='details.php?class=" . $row['class'] . "&submit=submit'>Class " . $row['class'] . "</a> ";
+                    echo "<a class='cls' href='detailst.php?class=" . $row['class'] . "&submit=submit'>Class " . $row['class'] . "</a> ";
                     if ($i % 3 == 0)
                         echo "<br><br>";
                     $i++;
@@ -121,7 +126,7 @@ $row_num = mysqli_num_rows($check_hash_result);
                     while ($row = mysqli_fetch_assoc($std_details)) {
                         echo "<tr><td> " . $row['name'] . "</td>";
                         echo "<td> " . $row['roll'] . "</td>";
-                        echo "<td><a href='details.php?class=" . $class . "&roll=" . $row['roll'] . "&name=" . $row['name'] . "&attend=true'>Go</a></tr>";
+                        echo "<td><a href='detailst.php?class=" . $class . "&roll=" . $row['roll'] . "&name=" . $row['name'] . "&attend=true'>Go</a></tr>";
                     }
                 }
             }

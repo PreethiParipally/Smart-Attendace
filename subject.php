@@ -12,53 +12,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Details</title>
-    <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="FaviconIcon" href="logo.png" type="image/x-icon">
-      <link rel="shortcut icon" href="logo.png" type="image/x-icon">
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Smart Attendance</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="styletest.css">
+  <!-- fa fa icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    /* .bg {
+      background: rgb(227, 251, 241);
+      background: linear-gradient(90deg, rgba(227, 251, 241, 0.981127485173757) 40%, rgba(199, 231, 239, 1) 100%);
+    } */
+
+    .icon {
+      /* padding-left: 0.5rem; */
+      padding-right: 0.5rem;
+    }
+
+    .nav-item {
+      font-size: 2rem;
+      /* padding-left: 0.5rem; */
+      padding-right: 4rem;
+    }
+
+    .item2 {
+      padding-right: 0;
+    }
+
+    .navbar-header {
+      padding-right: 2rem;
+    }
+  </style>
 </head>
-<body>
-    <div id="container">
-        <nav class="navbar navbar-expand-sm bg-info navbar-dark">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" style="border: 1px solid black; margin-right: 8%;">
-                <span class="icon-bar" style="background-color: black;"></span>
-                <span class="icon-bar" style="background-color: black;"></span>
-                <span class="icon-bar" style="background-color: black;"></span>                        
-              </button>
-              <img src="logo.png" width="40px" height="40px" style="margin-top:4px;">
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-              <ul class="nav navbar-nav">
-                <li><a href="homestudent.php"><span id="high"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-  <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
-</svg> Home</span></a></li>
-                <li class="active"><a href="#"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-book-half" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 0 0 7.5 2.5v11a.5.5 0 0 0 .854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 0 0-.799-.34 12.96 12.96 0 0 0-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0 1 15 2.82z"/>
-  <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 0 1 8.5 2.5v11a.5.5 0 0 1-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 0 1 0 13.5v-11a.5.5 0 0 1 .276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 0 1 .22-.103 12.958 12.958 0 0 1 2.7-.869z"/>
-</svg> Subjects</a></li>
-                <li><a href="details1.php"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-book-half" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 0 0 7.5 2.5v11a.5.5 0 0 0 .854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 0 0-.799-.34 12.96 12.96 0 0 0-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0 1 15 2.82z"/>
-  <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 0 1 8.5 2.5v11a.5.5 0 0 1-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 0 1 0 13.5v-11a.5.5 0 0 1 .276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 0 1 .22-.103 12.958 12.958 0 0 1 2.7-.869z"/>
-</svg> Details</a></li>
-                <li><a href="attendance1.php"><span id="high"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-check-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM0 5h16v9a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5zm10.854 3.854a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
-</svg> Attendance</span></a></li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="logout.php"><span class="glyphicon glyphicon-log-in" id="high"></span> <span id="high">Log Out</span></a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <h1 align="center">VNRVJIET</h1>
+
+<body style="background-color: #27EF9F, #0DB8DE;">
+  <div id="container">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+      <!-- Brand -->
+      <div class="navbar-header">
+        <img src="logo.png" width="50px" height="45px" style="margin-top:4px;">
+      </div>
+
+
+      <!-- Toggler/collapsibe Button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="homestudent.php"><i class="fa fa-home icon" aria-hidden="true"></i>Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="subject.php"><i class="fa fa-info-circle icon" aria-hidden="true"></i>Subjects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="details1.php"><i class="fa fa-info-circle icon" aria-hidden="true"></i>Details</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="attendance1.php"><i class="fa fa-calendar-check-o icon" aria-hidden="true"></i>Attendance</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item item2">
+            <a class="nav-link" href="logout.php"><i class="fa fa-sign-out icon" aria-hidden="true"></i>LogOut</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div>
+        <h1 align="center" style="padding-top: 2rem;">VNRVJIET</h1>
         <h2 align="center">Subjects</h2>
         <p align="center" id="bd">
             <?php
@@ -121,15 +152,20 @@
             </div>
         </p>
         <hr style="height:2px;width:98%;color:gray;background-color:gray">
-        <div id="con">
+    <div id="con" class="jumbotron" style="text-align:center;">
         <h4>Contact Us:</h4>
-            <font size="3px">Phone No: +033 2345-6789<br>
-            Email: abcschool2020@gmail.com<br>
-            Address:India</font>
-            <br>
-        </div>
-        <hr style="height:1px; width:80%; color:gray; background-color:gray">
-        <p align=center><code>Copyright (c) 2020, Purnadip Manna</code></p>
+        <font size="3px">Phone No: +91-40-23042761<br>
+            Email: vnrvjiet2021@gmail.com<br>
+            Address: Bachupally, Hyderabad, Telangana, India</font>
+        <br>
     </div>
+    <hr style="height:2px; width:98%; color:gray; background-color:gray">
+    <p align=center style="color:grey"><b>Copyright &#9400; 2021, 2G4E</b></p>
+    </div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </body>
 </html>
